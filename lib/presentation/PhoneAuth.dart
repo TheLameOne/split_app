@@ -5,6 +5,8 @@ import 'package:split_app/custom/CustomTextField.dart';
 import 'package:split_app/utils/Global.dart';
 import 'package:split_app/utils/StringValues.dart';
 
+import '../services/LocalAuth.dart';
+
 class PhoneAuth extends StatefulWidget {
   static String routeNamed = StringValues.phoneAuth;
   const PhoneAuth({super.key});
@@ -14,6 +16,21 @@ class PhoneAuth extends StatefulWidget {
 }
 
 class _PhoneAuthState extends State<PhoneAuth> {
+  @override
+  void initState() {
+    super.initState();
+    _fingerprint();
+  }
+
+  _fingerprint() async {
+    final isAuthenticated = await LocalAuthApi.authenticate();
+    if (isAuthenticated) {
+      print("Authenticated");
+    } else {
+      print("Not Authenticated");
+    }
+  }
+
   String phoneNumber = "";
   @override
   Widget build(BuildContext context) {
@@ -52,7 +69,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                     visiblepostIcon: false,
                     labelText: "Send Otp",
                     onTap: () {
-                      authService.sendSms(phoneNumber: "+91"+phoneNumber);
+                      authService.sendSms(phoneNumber: "+91" + phoneNumber);
                     },
                     containerColor: Colors.orange)
               ],

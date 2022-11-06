@@ -6,9 +6,9 @@ import 'package:split_app/presentation/PhoneAuth.dart';
 import 'package:split_app/utils/StringValues.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
